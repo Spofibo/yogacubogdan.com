@@ -6,8 +6,15 @@ const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
 
   theme: {
-    extend: {}
+    extend: {},
+    container: {
+      center: true,
+    },
   },
+
+	daisyui: {
+		themes: 'cupcake',
+	},
 
   plugins: [typography, daisyui]
 };
