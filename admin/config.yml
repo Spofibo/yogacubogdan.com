@@ -1,54 +1,63 @@
 local_backend: true
 
 backend:
-    name: github
-    repo: spofibo/yogacubogdan.com
-    branch: master
-    # base_url: https://cms.majestico.workers.dev
+  name: github
+  repo: spofibo/yogacubogdan.com
+  branch: master
+  # base_url: https://cms.majestico.workers.dev
 
-# These lines should *not* be indented
+# display_url: http://localhost:1313
+# site_url: http://localhost:1313/
+# logo_url: /media/logo.svg
 media_folder: "static/images/uploads" # Media files will be stored in the repo under static/images/uploads
 public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
+slug:
+  encoding: ascii
+  clean_accents: true
+
 aliases:
-  - &TITLE {name: title, label: Title, widget: string}
-  - &DESCRIPTION {name: description, label: Description, widget: text, required: false}
-  - &BODY {name: body, label: Body, widget: markdown}
-  - &IMAGE {name: image, label: Image, widget: image}
-  - &VISIBLE_IN_CMS {name: visibleInCMS, widget: hidden, default: true}
+  - &TITLE { name: title, label: Title, widget: string }
+  - &DESCRIPTION {
+      name: description,
+      label: Description,
+      widget: text,
+      required: false,
+    }
+  - &BODY { name: body, label: Body, widget: markdown }
+  - &IMAGE { name: image, label: Image, widget: image }
+  - &VISIBLE_IN_CMS { name: visibleInCMS, widget: hidden, default: true }
 
 collections:
-  # - name: blog
-  #   label: Blog
-  #   label_singular: post
-  #   folder: content/blog
-  #   preview_path: blog/{{slug}}
-  #   create: true
-  #   filter: {field: visibleInCMS, value: true}
-  #   editor:
-  #     preview: false
-  #   fields: [
-  #     *TITLE,
-  #     *DESCRIPTION,
-  #     *IMAGE,
-  #     *BODY,
-  #     *VISIBLE_IN_CMS,
-  #   ]
+  - name: blog
+    label: Blog
+    label_singular: post
+    folder: content/blog
+    preview_path: blog/{{slug}}
+    create: true
+    filter: { field: visibleInCMS, value: true }
+    editor:
+      preview: false
+    fields: [*TITLE, *DESCRIPTION, *IMAGE, *BODY, *VISIBLE_IN_CMS]
 
   - name: pages
     label: Pages
     format: yaml-frontmatter
     editor:
       preview: false
-    files: [
-      {label: Home, name: home, file: content/_index.md, fields: [
-        *TITLE,
-        *DESCRIPTION,
-        *IMAGE,
-        *BODY,
-      ]},
-      {label: Blog list, name: blog-list, file: content/blog/_index.md, preview_path: blog, fields: [
-        *TITLE,
-        *DESCRIPTION,
-      ]},
-    ]
+    files:
+      [
+        {
+          label: Home,
+          name: home,
+          file: content/_index.md,
+          fields: [*TITLE, *DESCRIPTION, *IMAGE, *BODY],
+        },
+        {
+          label: Blog list,
+          name: blog-list,
+          file: content/blog/_index.md,
+          preview_path: blog,
+          fields: [*TITLE, *DESCRIPTION],
+        },
+      ]
